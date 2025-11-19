@@ -1,63 +1,326 @@
+/* === Base layout === */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f5e79e;
+  --bg-alt: #fdfaf0;
+  --card-bg: #ffffff;
+  --accent: #f7c948;
+  --accent-strong: #f0a202;
+  --border-subtle: #ddd;
+  --text: #222;
+  --text-soft: #555;
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.15);
+  --radius-lg: 14px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f5e79e; /* Dull Yellow */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #fff8d5 0, var(--bg) 55%, #f2da7c 100%);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
-.container {
-    width: 100%;
-    max-width: 900px;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
+
+/* Visually hidden but accessible label */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(50%);
+  overflow: hidden;
 }
+
+.app {
+  width: 100%;
+  max-width: 1200px;
+  margin: 16px;
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 20px;
+}
+
+/* === Header / Brand === */
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  object-fit: cover;
+  background: #fff7da;
 }
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 10px 0;
+
+.brand-text h1 {
+  font-size: 1.35rem;
+  margin: 0;
 }
-input {
-    width: 75%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
+
+.tagline {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
 }
-button {
-    padding: 12px 18px;
-    border: none;
-    background-color: #ffcc00;
-    color: #333;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+
+.tagline-sub {
+  opacity: 0.8;
+  font-style: italic;
 }
-button:hover {
-    background-color: #ffdb4d;
+
+/* === Address bar & toolbar === */
+
+.address-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
 }
-.browser-container {
-    width: 90%;
-    height: 80vh; /* Bigger browser window */
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid #ddd;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+.address-bar input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
 }
+
+.address-bar input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent-strong);
+}
+
+/* Buttons */
+
+.btn {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  padding: 7px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #fffdf6;
+  transition: background 0.12s ease, transform 0.05s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover {
+  background: #fff5cf;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent-strong);
+}
+
+.btn.primary:hover {
+  background: var(--accent-strong);
+  color: #201808;
+}
+
+.btn.secondary {
+  background: #ffffff;
+}
+
+.btn.small {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.icon-btn {
+  width: 34px;
+  padding-inline: 0;
+}
+
+/* Toolbar */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  gap: 10px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* === Main layout === */
+
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3.5fr) minmax(0, 1.2fr);
+  gap: 12px;
+  margin-top: 8px;
+  min-height: 420px;
+}
+
+.browser-shell {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-frame {
+  flex: 1;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
 iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #f2f2f2;
 }
+
+/* === History panel === */
+
+.history-panel {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-title {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 260px;
+}
+
+.history-item {
+  margin-bottom: 4px;
+}
+
+.history-link {
+  width: 100%;
+  text-align: left;
+  border-radius: var(--radius-sm);
+  border: 0;
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  background: #fffdf6;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.history-link:hover {
+  background: #fff5cf;
+}
+
+.history-url {
+  word-break: break-all;
+}
+
+.history-domain {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+}
+
+/* === Responsive === */
+
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .history-panel {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    margin: 8px;
+    padding: 12px;
+  }
+
+  .brand-text h1 {
+    font-size: 1.1rem;
+  }
+
+  .address-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .address-bar input {
+    width: 100%;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .status {
+    align-self: flex-start;
+  }
+}
+
