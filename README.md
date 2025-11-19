@@ -1,2 +1,2 @@
-# T.H.B.B
-The Holy Browser in a Browser original
+# B.I.A.B
+Browser in a browser, built off of the most recent version of Pixelatedash's T.H.B.B.
