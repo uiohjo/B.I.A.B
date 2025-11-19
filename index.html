@@ -1,22 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Holy Browser in a Browser</title>
-    <link rel="icon" type="image/png" href="icongold.png">
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Holy Browser in a Browser</title>
+  <link rel="icon" type="image/png" href="icongold.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <img src="icongold.png" alt="Icon" class="icon">
-        <h1>The Holy Browser in a Browser</h1>
-        <input type="text" id="urlInput" placeholder="Enter a URL">
-        <button onclick="loadWebsite()">Go</button>
-    </div>
-    <div class="browser-container">
-        <iframe id="browserFrame" src="https://www.google.com" allowfullscreen></iframe>
-    </div>
-    <script src="script.js"></script> <!-- Link to external JavaScript -->
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <img src="icongold.png" alt="Holy icon" class="icon" />
+        <div class="brand-text">
+          <h1>The Holy Browser in a Browser</h1>
+          <p class="tagline">
+            A tiny fake browser, inside your real browser. <span class="tagline-sub">Some sites may block embedding.</span>
+          </p>
+        </div>
+      </div>
+
+      <form id="browserForm" class="address-bar" autocomplete="off">
+        <label for="urlInput" class="sr-only">Website address</label>
+        <input
+          type="text"
+          id="urlInput"
+          name="url"
+          placeholder="Enter a URL (e.g. example.com or https://example.com)"
+          spellcheck="false"
+        />
+        <button type="submit" class="btn primary">Go</button>
+        <button type="button" id="reloadBtn" class="btn">Reload</button>
+      </form>
+
+      <div class="toolbar">
+        <div class="nav-buttons">
+          <button type="button" id="backBtn" class="btn icon-btn" disabled title="Back">
+            ←
+          </button>
+          <button type="button" id="forwardBtn" class="btn icon-btn" disabled title="Forward">
+            →
+          </button>
+          <button type="button" id="homeBtn" class="btn" title="Home">
+            Home
+          </button>
+        </div>
+        <div class="status" id="statusText" aria-live="polite">
+          Ready.
+        </div>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section class="browser-shell" aria-label="Embedded website">
+        <div class="browser-frame">
+          <iframe
+            id="browserFrame"
+            title="Browser in a browser"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+      </section>
+
+      <aside class="history-panel" aria-label="Recent sites">
+        <h2 class="history-title">Recent</h2>
+        <ul id="historyList" class="history-list">
+          <!-- Filled by script -->
+        </ul>
+        <button type="button" id="clearHistoryBtn" class="btn secondary small">
+          Clear history
+        </button>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
